@@ -1,0 +1,63 @@
+# VulnaX-Pro base configuration. Profiles and CLI overrides layer on top.
+concurrency:
+  http: 30
+  dns: 50
+  process: 8
+  cpu: 4
+timeouts:
+  http: 12.0
+  dns: 5.0
+  process: 120.0
+rate:
+  global_rps: 50
+  per_host_rps: 10
+retry:
+  attempts: 2
+  backoff: 0.4
+  jitter: 0.2
+crawler:
+  max_pages: 150
+  max_depth: 2
+discovery:
+  dns_brute: true
+  ct_logs: true
+  max_brute: 200
+ai:
+  enabled: true
+  provider: auto            # auto = first available in `priority`, by present key
+  priority: [anthropic, openrouter, deepseek, kimi, gemini]
+  max_findings: 25
+  model: claude-opus-4-8    # anthropic default
+  providers:
+    anthropic:
+      kind: anthropic
+      env: [ANTHROPIC_API_KEY]
+      model: claude-opus-4-8
+      base_url: https://api.anthropic.com
+    openrouter:
+      kind: openai
+      env: [OPENROUTER_API_KEY, OPENROUTER_API_KEY_2]
+      model: deepseek/deepseek-chat
+      base_url: https://openrouter.ai/api/v1
+    deepseek:
+      kind: openai
+      env: [DEEPSEEK_API_KEY]
+      model: deepseek-chat
+      base_url: https://api.deepseek.com/v1
+    kimi:
+      kind: openai
+      env: [MOONSHOT_API_KEY]
+      model: moonshot-v1-8k
+      base_url: https://api.moonshot.ai/v1
+    gemini:
+      kind: gemini
+      env: [GEMINI_API_KEY]
+      model: gemini-1.5-flash
+      base_url: https://generativelanguage.googleapis.com/v1beta
+assessment:
+  active: false             # enable active validators (dalfox/sqlmap) via --active
+  active_timeout: 240.0
+  max_active_targets: 50
+report:
+  formats: [html, md, json]
+user_agent: "VulnaX-Pro/1.0 (+authorized-assessment)"

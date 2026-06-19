@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+cache/
+artifacts/
+output/
+reports/
+recon_memory/
+wordlists/
+templates/nuclei/
+config/scope.yaml
+config/subfinder-provider-config.yaml

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "project": "VulnaX-Pro",
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "date": "2026-06-15",
+      "error_message": "Live assets shown as 1 on dashboard but 0 in stored result; downstream engines (tech/crawler/etc) produced nothing.",
+      "root_cause": "Store._merge only filled EMPTY scalar fields, so re-adding an Asset with status='live' could not overwrite the existing status='candidate' (non-empty). Status transitions were silently dropped, so assets(status='live') returned empty for every engine after validation.",
+      "fix": "Special-cased the 'status' field in Store._merge with a priority map (candidate<dead<live); the higher-priority status now wins on merge.",
+      "tags": ["store", "merge", "asset-status", "pipeline-dataflow"]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# VulnaX-Pro scope definition (mandatory for authorized assessment).
+# Copy to scope.yaml and edit. Out-of-scope targets are refused.
+scope:
+  in_scope:
+    domains:
+      - example.com
+      - "*.example.com"
+    cidrs: []
+  out_of_scope:
+    domains:
+      - status.example.com
+  ports: [80, 443, 8080, 8443, 8000, 8888]
+  rate:
+    global_rps: 50
+    per_host_rps: 10

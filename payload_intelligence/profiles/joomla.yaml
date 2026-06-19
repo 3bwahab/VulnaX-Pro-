@@ -1,0 +1,8 @@
+tech: joomla
+nuclei_tags: [joomla, cms, cve]
+sensitive_files:
+  - /administrator/
+  - /configuration.php.bak
+  - /joomla.xml
+  - /administrator/manifests/files/joomla.xml
+strategy: classic
